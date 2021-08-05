@@ -4,56 +4,105 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<style>
+circle {
+  fill: cadetblue;
+}
+line {
+  stroke: #ccc;
+}
+text {
+  text-anchor: middle;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  fill: #666;
+  font-size: 16px;
+}
+
+</style>
 </head>
 <body>
 <div id="content">
-  <svg width="700" height="400">
-    <g transform="translate(50, 200)"></g>
+  <svg width="400" height="300">
+    <g class="links"></g>
+    <g class="nodes"></g>
   </svg>
 </div>
 
+
 <script>
-var width = 600, height = 400;
+var width = 400, height = 300
 
-var colorScale = ['orange', 'lightblue', '#B19CD9'];
-var xCenter = [100, 300, 500];
+var nodes = [
+	{name: 'A'},
+	{name: 'B'},
+	{name: 'C'},
+	{name: 'D'},
+	{name: 'E'},
+	{name: 'F'},
+	{name: 'G'},
+	{name: 'H'},
+]
 
-var numNodes = 100;
-var nodes = d3.range(numNodes).map(function(d, i) {
-	return {
-		radius: Math.random() * 25,
-		category: i % 3
-	}
-});
+var links = [
+	{source: 0, target: 1},
+	{source: 0, target: 2},
+	{source: 0, target: 3},
+	{source: 1, target: 6},
+	{source: 3, target: 4},
+	{source: 3, target: 7},
+	{source: 4, target: 5},
+	{source: 4, target: 7}
+]
 
 var simulation = d3.forceSimulation(nodes)
-	.force('charge', d3.forceManyBody().strength(5))
-	.force('x', d3.forceX().x(function(d) {
-		return xCenter[d.category];
-	}))
-	.force('collision', d3.forceCollide().radius(function(d) {
-		return d.radius;
-	}))
+	.force('charge', d3.forceManyBody().strength(-100))
+	.force('center', d3.forceCenter(width / 2, height / 2))
+	.force('link', d3.forceLink().links(links))
 	.on('tick', ticked);
 
-function ticked() {
-	var u = d3.select('svg g')
-		.selectAll('circle')
-		.data(nodes)
-		.join('circle')
-		.attr('r', function(d) {
-			return d.radius;
+function updateLinks() {
+	var u = d3.select('.links')
+		.selectAll('line')
+		.data(links)
+		.join('line')
+		.attr('x1', function(d) {
+			return d.source.x
 		})
-		.style('fill', function(d) {
-			return colorScale[d.category];
+		.attr('y1', function(d) {
+			return d.source.y
 		})
-		.attr('cx', function(d) {
-			return d.x;
+		.attr('x2', function(d) {
+			return d.target.x
 		})
-		.attr('cy', function(d) {
-			return d.y;
+		.attr('y2', function(d) {
+			return d.target.y
 		});
 }
+
+function updateNodes() {
+	u = d3.select('.nodes')
+		.selectAll('text')
+		.data(nodes)
+		.join('text')
+		.text(function(d) {
+			return d.name
+		})
+		.attr('x', function(d) {
+			return d.x
+		})
+		.attr('y', function(d) {
+			return d.y
+		})
+		.attr('dy', function(d) {
+			return 5
+		});
+}
+
+function ticked() {
+	updateLinks()
+	updateNodes()
+}
+
 
 
 </script>
