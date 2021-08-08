@@ -40,6 +40,7 @@ const link =  d3.select('svg').append("g")
 	
 const node = d3.select('svg').append("g")
 	.attr("fill", function(d){
+		console.log(d)
 		if(d.nodetype == 'industry'){
 			return "red"
 		}else{
