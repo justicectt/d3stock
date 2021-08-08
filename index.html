@@ -22,10 +22,28 @@ const root = d3.hierarchy(flaredata);
 const flarelinks = root.links();
 const flarenodes = root.descendants();
 const links = stocklinks
-const nodes = [{"id":"1101","name":"台泥","nodetype":"company"},
-	{"id":"1102","name":"亞泥","nodetype":"company"},
-	{"id":"1103","name":"嘉泥","nodetype":"company"},
-	{"id":"1104","name":"環泥","nodetype":"company"}]
+const nodes = [
+		{"id":"1101","name":"台泥","nodetype":"company"},
+		{"id":"1102","name":"亞泥","nodetype":"company"},
+		{"id":"1103","name":"嘉泥","nodetype":"company"},
+		{"id":"1104","name":"環泥","nodetype":"company"},
+		{"id":"1108","name":"幸福","nodetype":"company"},
+		{"id":"1109","name":"信大","nodetype":"company"},
+		{"id":"1110","name":"東泥","nodetype":"company"},
+		{"id":"1201","name":"味全","nodetype":"company"},
+		{"id":"1203","name":"味王","nodetype":"company"},
+		{"id":"1210","name":"大成","nodetype":"company"},
+		{"id":"1213","name":"大飲","nodetype":"company"},
+		{"id":"1215","name":"卜蜂","nodetype":"company"},
+		{"id":"1216","name":"統一","nodetype":"company"},
+		{"id":"1217","name":"愛之味","nodetype":"company"},
+		{"id":"1218","name":"泰山","nodetype":"company"},
+		{"id":"1219","name":"福壽","nodetype":"company"},
+		{"id":"1220","name":"台榮","nodetype":"company"},
+		{"id":"1225","name":"福懋油","nodetype":"company"},
+		{"id":"1227","name":"佳格","nodetype":"company"},
+		{"id":"1229","name":"聯華","nodetype":"company"},
+		{"id":"1231","name":"聯華食","nodetype":"company"}]
 
 const simulation = d3.forceSimulation(nodes)
     //.force("link", d3.forceLink(links).id(d => d.id).distance(0).strength(1))
