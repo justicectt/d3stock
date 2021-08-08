@@ -89,7 +89,7 @@ const nodes = [{"id":"01","name":"水泥工業","nodetype":"industry"},
 	{"id":"80","name":"管理股票","nodetype":"industry"}]
 
 const simulation = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink().links(links).id(d => d.id))
+    //.force("link", d3.forceLink().links(links).id(d => d.id))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(400,400))
     
