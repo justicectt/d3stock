@@ -91,9 +91,10 @@ const nodes = [{"id":"01","name":"水泥工業","nodetype":"industry"},
 const simulation = d3.forceSimulation(nodes)    
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(400,400))
+    .force('link',d3.forceLink())
     .on('tick', ticked);
 console.log(simulation.nodes)   
-simulation.force('link') = d3.forceLink().links(links).id(function(d){console.log(d.name);return d.id})
+simulation.force('link').links(links).id(function(d){console.log(d.name);return d.id})
 const link = d3.select('svg').append("g")
     .attr("stroke", "#999")
     .attr("stroke-opacity", 0.6)
