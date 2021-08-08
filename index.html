@@ -22,7 +22,10 @@ const root = d3.hierarchy(flaredata);
 const flarelinks = root.links();
 const flarenodes = root.descendants();
 const links = stocklinks
-const nodes = [{},{},{},{}]
+const nodes = [{"id":"1101","name":"台泥","nodetype":"company"},
+	{"id":"1102","name":"亞泥","nodetype":"company"},
+	{"id":"1103","name":"嘉泥","nodetype":"company"},
+	{"id":"1104","name":"環泥","nodetype":"company"}]
 
 const simulation = d3.forceSimulation(nodes)
     //.force("link", d3.forceLink(links).id(d => d.id).distance(0).strength(1))
