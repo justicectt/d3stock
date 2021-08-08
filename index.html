@@ -6,6 +6,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.min.js"></script>
 <script src="./js/basicdata.js"></script>
 <style>
+circle {
+  fill: cadetblue;
+}
+line {
+  stroke: #ccc;
+}
+text {
+  text-anchor: middle;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  fill: #666;
+  font-size: 16px;
+}
 
 
 </style>
@@ -13,106 +25,41 @@
 <body>
 <div id="content">
   <svg width="800" height="800">
+    <g class="links"></g>
+    <g class="nodes"></g>
   </svg>
 </div>
 
 <script>
+var width = 400, height = 300
 
-const root = d3.hierarchy(flaredata);
-const flarelinks = root.links();
-const flarenodes = root.descendants();
-const links = [{"source":"01","traget":"02"},
-	{"source":"02","traget":"03"},
-	{"source":"03","traget":"04"},
-	{"source":"04","traget":"05"},
-	{"source":"05","traget":"06"},
-	{"source":"06","traget":"08"},
-	{"source":"08","traget":"09"},
-	{"source":"09","traget":"10"},
-	{"source":"10","traget":"11"},
-	{"source":"11","traget":"12"},
-	{"source":"12","traget":"14"},
-	{"source":"14","traget":"15"},
-	{"source":"15","traget":"16"},
-	{"source":"16","traget":"17"},
-	{"source":"17","traget":"18"},
-	{"source":"18","traget":"19"},
-	{"source":"19","traget":"20"},
-	{"source":"20","traget":"21"},
-	{"source":"21","traget":"22"},
-	{"source":"22","traget":"23"},
-	{"source":"23","traget":"24"},
-	{"source":"24","traget":"25"},
-	{"source":"25","traget":"26"},
-	{"source":"26","traget":"27"},
-	{"source":"27","traget":"28"},
-	{"source":"28","traget":"29"},
-	{"source":"29","traget":"30"},
-	{"source":"30","traget":"31"},
-	{"source":"31","traget":"32"},
-	{"source":"32","traget":"33"},
-	{"source":"33","traget":"34"},
-	{"source":"34","traget":"80"},
-	{"source":"80","traget":"01"}]
-const nodes = [{"id":"01","name":"水泥工業","nodetype":"industry"},
-	{"id":"02","name":"食品工業","nodetype":"industry"},
-	{"id":"03","name":"塑膠工業","nodetype":"industry"},
-	{"id":"04","name":"紡織纖維","nodetype":"industry"},
-	{"id":"05","name":"電機機械","nodetype":"industry"},
-	{"id":"06","name":"電器電纜","nodetype":"industry"},
-	{"id":"08","name":"玻璃陶瓷","nodetype":"industry"},
-	{"id":"09","name":"造紙工業","nodetype":"industry"},
-	{"id":"10","name":"鋼鐵工業","nodetype":"industry"},
-	{"id":"11","name":"橡膠工業","nodetype":"industry"},
-	{"id":"12","name":"汽車工業","nodetype":"industry"},
-	{"id":"14","name":"建材營造","nodetype":"industry"},
-	{"id":"15","name":"航運業","nodetype":"industry"},
-	{"id":"16","name":"觀光事業","nodetype":"industry"},
-	{"id":"17","name":"金融業","nodetype":"industry"},
-	{"id":"18","name":"貿易百貨","nodetype":"industry"},
-	{"id":"19","name":"綜合","nodetype":"industry"},
-	{"id":"20","name":"其他","nodetype":"industry"},
-	{"id":"21","name":"化學工業","nodetype":"industry"},
-	{"id":"22","name":"生技醫療業","nodetype":"industry"},
-	{"id":"23","name":"油電燃氣業","nodetype":"industry"},
-	{"id":"24","name":"半導體業","nodetype":"industry"},
-	{"id":"25","name":"電腦及週邊設備業","nodetype":"industry"},
-	{"id":"26","name":"光電業","nodetype":"industry"},
-	{"id":"27","name":"通信網路業","nodetype":"industry"},
-	{"id":"28","name":"電子零組件業","nodetype":"industry"},
-	{"id":"29","name":"電子通路業","nodetype":"industry"},
-	{"id":"30","name":"資訊服務業","nodetype":"industry"},
-	{"id":"31","name":"其他電子業","nodetype":"industry"},
-	{"id":"32","name":"文化創意業","nodetype":"industry"},
-	{"id":"33","name":"農業科技業","nodetype":"industry"},
-	{"id":"34","name":"電子商務","nodetype":"industry"},
-	{"id":"80","name":"管理股票","nodetype":"industry"}]
+var nodes = [
+	{name: 'A'},
+	{name: 'B'},
+	{name: 'C'},
+	{name: 'D'},
+	{name: 'E'},
+	{name: 'F'},
+	{name: 'G'},
+	{name: 'H'},
+]
 
-const simulation = d3.forceSimulation(nodes)    
-    .force("charge", d3.forceManyBody())
-    .force("center", d3.forceCenter(400,400))
-    .force('link',d3.forceLink())
-    .on('tick', ticked);
-console.log(simulation.nodes)   
-simulation.force('link').links(links).id(function(d){console.log(d.name);return d.id})
-const link = d3.select('svg').append("g")
-    .attr("stroke", "#999")
-    .attr("stroke-opacity", 0.6)
-  .selectAll("line")
-  .data(links)
-  .join("line");
+var links = [
+	{source: 0, target: 1},
+	{source: 0, target: 2},
+	{source: 0, target: 3},
+	{source: 1, target: 6},
+	{source: 3, target: 4},
+	{source: 3, target: 7},
+	{source: 4, target: 5},
+	{source: 4, target: 7}
+]
 
-const node = d3.select('svg').append("g")
-    .attr("fill", "#fff")
-    .attr("stroke", "#000")
-    .attr("stroke-width", 1.5)
-  .selectAll("circle")
-  .data(nodes)
-  .join("circle")
-    .attr("fill", d => d.children ? null : "#000")
-    .attr("stroke", d => d.children ? null : "#fff")
-    .attr("r", 3.5);
-
+var simulation = d3.forceSimulation(nodes)
+	.force('charge', d3.forceManyBody().strength(-100))
+	.force('center', d3.forceCenter(width / 2, height / 2))
+	.force('link', d3.forceLink().links(links))
+	.on('tick', ticked);
 
 function updateLinks() {
 	var u = d3.select('.links')
