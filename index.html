@@ -54,15 +54,15 @@ var nodes = [
 	{"id":"08","name":"玻璃陶瓷","nodetype":"industry"},
 	{"id":"09","name":"造紙工業","nodetype":"industry"}
 ]
-var links = [
-	{'source': '01', 'target': '02'},
-	{'source': '01', 'target': '03'},
-	{'source': '01', 'target': '04'},
-	{'source': '02', 'target': '09'},
-	{'source': '04', 'target': '05'},
-	{'source': '04', 'target': '08'},
-	{'source': '05', 'target': '06'},
-	{'source': '05', 'target': '08'}
+var links = [	
+	{'source': '01', 'traget': '02'},
+	{'source': '02', 'traget': '03'},
+	{'source': '03', 'traget': '04'},
+	{'source': '04', 'traget': '05'},
+	{'source': '05', 'traget': '06'},
+	{'source': '06', 'traget': '08'},
+	{'source': '08', 'traget': '09'},
+	{'source': '09', 'traget': '01'},
 ]
 
 var simulation = d3.forceSimulation(nodes)
