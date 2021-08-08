@@ -19,14 +19,16 @@
 <script>
 
 const root = d3.hierarchy(flaredata);
-const links = root.links();
-const nodes = root.descendants();
+//const links = root.links();
+//const nodes = root.descendants();
+const links = stocklinks
+const nodes = stocknodes
 
 const simulation = d3.forceSimulation(nodes)
     .force("link", d3.forceLink(links).id(d => d.id).distance(0).strength(1))
     .force("charge", d3.forceManyBody().strength(-50))
-    .force("x", d3.forceX())
-    .force("y", d3.forceY());
+    .force("center", d3.forceCenter(400,400))
+    
 
 
 const link = d3.select('svg').append("g")
