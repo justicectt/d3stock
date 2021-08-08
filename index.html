@@ -45,20 +45,20 @@ var nodes = [
 ]
 
 var links = [
-	{source: 0, target: 1},
-	{source: 0, target: 2},
-	{source: 0, target: 3},
-	{source: 1, target: 6},
-	{source: 3, target: 4},
-	{source: 3, target: 7},
-	{source: 4, target: 5},
-	{source: 4, target: 7}
+	{source: 'A', target: 'B'},
+	{source: 'A', target: 'C'},
+	{source: 'A', target: 'D'},
+	{source: 'B', target: 'G'},
+	{source: 'D', target: 'E'},
+	{source: 'D', target: 'H'},
+	{source: 'E', target: 'F'},
+	{source: 'E', target: 'H'}
 ]
 
 var simulation = d3.forceSimulation(nodes)
 	.force('charge', d3.forceManyBody().strength(-100))
 	.force('center', d3.forceCenter(width / 2, height / 2))
-	.force('link', d3.forceLink().links(links))
+	.force('link', d3.forceLink().links(links).id(d => d.name))
 	.on('tick', ticked);
 
 function updateLinks() {
