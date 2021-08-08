@@ -45,27 +45,24 @@ var nodes = [
 ]
 */
 var nodes = [
-	{'id':'01','name':'水泥工業','nodetype':'industry'},
-	{'id':'02','name':'食品工業','nodetype':'industry'},
-	{'id':'03','name':'塑膠工業','nodetype':'industry'},
-	{'id':'04','name':'紡織纖維','nodetype':'industry'},
-	{'id':'05','name':'電機機械','nodetype':'industry'},
-	{'id':'06','name':'電器電纜','nodetype':'industry'},
-	{'id':'08','name':'玻璃陶瓷','nodetype':'industry'},
-	{'id':'09','name':'造紙工業','nodetype':'industry'},
-	{'id':'10','name':'鋼鐵工業','nodetype':'industry'},
+	{"id":"01","name":"水泥工業","nodetype":"industry"},
+	{"id":"02","name":"食品工業","nodetype":"industry"},
+	{"id":"03","name":"塑膠工業","nodetype":"industry"},
+	{"id":"04","name":"紡織纖維","nodetype":"industry"},
+	{"id":"05","name":"電機機械","nodetype":"industry"},
+	{"id":"06","name":"電器電纜","nodetype":"industry"},
+	{"id":"08","name":"玻璃陶瓷","nodetype":"industry"},
+	{"id":"09","name":"造紙工業","nodetype":"industry"}
 ]
 var links = [
-	{'source':'01','traget':'02'},
-	{'source':'02','traget':'03'},
-	{'source':'03','traget':'04'},
-	{'source':'04','traget':'05'},
-	{'source':'05','traget':'06'},
-	{'source':'06','traget':'08'},
-	{'source':'08','traget':'09'},
-	{'source':'09','traget':'10'},
-	{'source':'10','traget':'01'},
-	
+	{'source': '01', 'target': '02'},
+	{'source': '01', 'target': '03'},
+	{'source': '01', 'target': '04'},
+	{'source': '02', 'target': '09'},
+	{'source': '04', 'target': '05'},
+	{'source': '04', 'target': '08'},
+	{'source': '05', 'target': '06'},
+	{'source': '05', 'target': '08'}
 ]
 
 var simulation = d3.forceSimulation(nodes)
