@@ -93,7 +93,7 @@ const simulation = d3.forceSimulation(nodes)
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(400,400))
     
-simulation.force("link").links(graph.links)
+simulation.force("link").links(inks)
 
 const link = d3.select('svg').append("g")
     .attr("stroke", "#999")
