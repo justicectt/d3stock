@@ -31,7 +31,7 @@ text {
 </div>
 
 <script>
-var width = 400, height = 300
+
 /*
 var nodes = [
 	{id:'01',name: 'A'},
@@ -43,7 +43,7 @@ var nodes = [
 	{id:'07',name: 'G'},
 	{id:'08',name: 'H'},
 ]
-*/
+
 var nodes = [
 	{"id":"01","name":"水泥工業","nodetype":"industry"},
 	{"id":"02","name":"食品工業","nodetype":"industry"},
@@ -55,16 +55,18 @@ var nodes = [
 	{"id":"09","name":"造紙工業","nodetype":"industry"}
 ]
 var links = [
-	{'source': '01', 'target': '02'},
-	{'source': '02', 'target': '03'},
-	{'source': '03', 'target': '04'},
-	{'source': '04', 'target': '05'},
-	{'source': '05', 'target': '06'},
-	{'source': '06', 'target': '08'},
-	{'source': '08', 'target': '09'},
-	{'source': '09', 'target': '01'}
+	{'source': '01', 'traget': '02'},
+	{'source': '02', 'traget': '03'},
+	{'source': '03', 'traget': '04'},
+	{'source': '04', 'traget': '05'},
+	{'source': '05', 'traget': '06'},
+	{'source': '06', 'traget': '08'},
+	{'source': '08', 'traget': '09'},
+	{'source': '09', 'traget': '01'},
 ]
-
+*/
+var nodes = stocknodes
+var links = stocklinks
 var simulation = d3.forceSimulation(nodes)
 	.force('charge', d3.forceManyBody().strength(-100))
 	.force('center', d3.forceCenter(width / 2, height / 2))
