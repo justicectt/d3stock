@@ -27,7 +27,7 @@ var simulation = d3.forceSimulation(nodes)
 	.force('center', d3.forceCenter(400,400))
 	.force('link', d3.forceLink().links(links).id(d => d.id).distance(0).strength(1))
 
-const link = svg.append("g")
+const link =  d3.select('svg').append("g")
 	.attr("stroke", "#999")
 	.attr("stroke-opacity", 0.6)
 	.selectAll("line")
