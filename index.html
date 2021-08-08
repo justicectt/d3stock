@@ -7,12 +7,16 @@
 <script src="./js/basicdata.js"></script>
 <style>
 
-
+svg{border:1px solid black}
+#content{
+position:relative;
+margin:auto
+}
 
 </style>
 </head>
 <body>
-<div id="content">
+<div id="content" width="1000" height="1000">
   <svg width="1000" height="1000">
   </svg>
 </div>
@@ -23,7 +27,7 @@
 var nodes = stocknodes
 var links = stocklinks
 var simulation = d3.forceSimulation(nodes)
-	.force('charge', d3.forceManyBody().strength(-10))
+	.force('charge', d3.forceManyBody().strength(-30))
 	.force('center', d3.forceCenter(400,400))
 	.force('link', d3.forceLink().links(links).id(d => d.id).distance(0).strength(1))
 
