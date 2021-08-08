@@ -42,15 +42,7 @@ const link =  d3.select('svg').append("g")
 	.join("line");
 	
 const node = d3.select('svg').append("g")
-	.attr("fill", function(d){
-		console.log(d)
-		if(d.nodetype == 'industry'){
-			return "red"
-		}else{
-			return "#fff"
-		}
-		
-	})
+	.attr("fill", "#fff")
 	.attr("stroke", "#000")
 	.attr("stroke-width", 1.5)
 	.selectAll("circle")
@@ -61,6 +53,15 @@ const node = d3.select('svg').append("g")
 			return 5
 		}else{
 			return 3.5
+		}
+		
+	})
+	.attr("fill",function(d){
+		console.log(d)
+		if(d.nodetype == 'industry'){
+			return "red"
+		}else{
+			return "#fff"
 		}
 		
 	})
