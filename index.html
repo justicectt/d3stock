@@ -34,25 +34,25 @@ text {
 var width = 400, height = 300
 
 var nodes = [
-	{id:'A',name: 'A'},
-	{id:'B',name: 'B'},
-	{id:'C',name: 'C'},
-	{id:'D',name: 'D'},
-	{id:'E',name: 'E'},
-	{id:'F',name: 'F'},
-	{id:'G',name: 'G'},
-	{id:'H',name: 'H'},
+	{id:'01',name: 'A'},
+	{id:'02',name: 'B'},
+	{id:'03',name: 'C'},
+	{id:'04',name: 'D'},
+	{id:'05',name: 'E'},
+	{id:'06',name: 'F'},
+	{id:'07',name: 'G'},
+	{id:'08',name: 'H'},
 ]
 
 var links = [
-	{source: 'A', target: 'B'},
-	{source: 'A', target: 'C'},
-	{source: 'A', target: 'D'},
-	{source: 'B', target: 'G'},
-	{source: 'D', target: 'E'},
-	{source: 'D', target: 'H'},
-	{source: 'E', target: 'F'},
-	{source: 'E', target: 'H'}
+	{source: '01', target: '02'},
+	{source: '01', target: '03'},
+	{source: '01', target: '04'},
+	{source: '02', target: '07'},
+	{source: '04', target: '05'},
+	{source: '04', target: '08'},
+	{source: '05', target: '06'},
+	{source: '05', target: '08'}
 ]
 
 var simulation = d3.forceSimulation(nodes)
