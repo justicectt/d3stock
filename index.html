@@ -6,27 +6,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.min.js"></script>
 <script src="./js/basicdata.js"></script>
 <style>
-circle {
-  fill: cadetblue;
-}
-line {
-  stroke: #ccc;
-}
-text {
-  text-anchor: middle;
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
-  fill: #666;
-  font-size: 16px;
-}
+
 
 
 </style>
 </head>
 <body>
 <div id="content">
-  <svg width="800" height="800">
-    <g class="links"></g>
-    <g class="nodes"></g>
+  <svg width="1000" height="1000">
   </svg>
 </div>
 
@@ -36,50 +23,37 @@ text {
 var nodes = stocknodes
 var links = stocklinks
 var simulation = d3.forceSimulation(nodes)
-	.force('charge', d3.forceManyBody().strength(-50))
+	.force('charge', d3.forceManyBody().strength(-10))
 	.force('center', d3.forceCenter(400,400))
 	.force('link', d3.forceLink().links(links).id(d => d.id).distance(0).strength(1))
-	.on('tick', ticked);
 
-function updateLinks() {
-	var u = d3.select('.links')
-		.selectAll('line')
-		.data(links)
-		.join('line')
-		.attr('x1', function(d) {
-			return d.source.x
-		})
-		.attr('y1', function(d) {
-			return d.source.y
-		})
-		.attr('x2', function(d) {
-			return d.target.x
-		})
-		.attr('y2', function(d) {
-			return d.target.y
-		});
-}
+const link = svg.append("g")
+	.attr("stroke", "#999")
+	.attr("stroke-opacity", 0.6)
+	.selectAll("line")
+	.data(links)
+	.join("line");
+	
+const node = d3.select('svg').append("g")
+	.attr("fill", "#fff")
+	.attr("stroke", "#000")
+	.attr("stroke-width", 1.5)
+	.selectAll("circle")
+	.data(nodes)
+	.join("circle")
+	.attr("r", 3.5)
+	
+simulation.on("tick", () => {
+    link
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
 
-function updateNodes() {
-	u = d3.select('.nodes')
-		.selectAll('circle')
-		.data(nodes)
-		.join('circle')		
-		.attr('x', function(d) {
-			return d.x
-		})
-		.attr('y', function(d) {
-			return d.y
-		})
-		.attr('dy', function(d) {
-			return 5
-		});
-}
-
-function ticked() {
-	updateLinks()
-	updateNodes()
-}
+    node
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
+  });
 
 
 </script>
