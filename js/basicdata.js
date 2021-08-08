@@ -1,8 +1,6 @@
 /**
  * 
  */
-var b = {}
-
 
 var stocknodes = [
 	{"id":"1101","name":"台泥","nodetype":"company"},
@@ -991,7 +989,6 @@ var stocknodes = [
 	{"id":"34","name":"電子商務","nodetype":"industry"},
 	{"id":"80","name":"管理股票","nodetype":"industry"}
 ];
-var a={}
 var stocklinks = [
 	{"source":"01","traget":"02"},
 	{"source":"02","traget":"03"},
