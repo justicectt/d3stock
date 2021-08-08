@@ -19,8 +19,8 @@
 <script>
 
 const root = d3.hierarchy(flaredata);
-//const links = root.links();
-//const nodes = root.descendants();
+const flarelinks = root.links();
+const flarenodes = root.descendants();
 const links = stocklinks
 const nodes = stocknodes
 
