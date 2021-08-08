@@ -34,14 +34,14 @@ text {
 var width = 400, height = 300
 
 var nodes = [
-	{name: 'A'},
-	{name: 'B'},
-	{name: 'C'},
-	{name: 'D'},
-	{name: 'E'},
-	{name: 'F'},
-	{name: 'G'},
-	{name: 'H'},
+	{id:'A',name: 'A'},
+	{id:'B',name: 'B'},
+	{id:'C',name: 'C'},
+	{id:'D',name: 'D'},
+	{id:'E',name: 'E'},
+	{id:'F',name: 'F'},
+	{id:'G',name: 'G'},
+	{id:'H',name: 'H'},
 ]
 
 var links = [
@@ -58,7 +58,7 @@ var links = [
 var simulation = d3.forceSimulation(nodes)
 	.force('charge', d3.forceManyBody().strength(-100))
 	.force('center', d3.forceCenter(width / 2, height / 2))
-	.force('link', d3.forceLink().links(links).id(d => d.name))
+	.force('link', d3.forceLink().links(links).id(d => d.id))
 	.on('tick', ticked);
 
 function updateLinks() {
