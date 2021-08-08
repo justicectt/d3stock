@@ -39,13 +39,27 @@ const link =  d3.select('svg').append("g")
 	.join("line");
 	
 const node = d3.select('svg').append("g")
-	.attr("fill", "#fff")
+	.attr("fill", function(d){
+		if(d.nodetype == 'industry'){
+			return "red"
+		}else{
+			return "#fff"
+		}
+		
+	})
 	.attr("stroke", "#000")
 	.attr("stroke-width", 1.5)
 	.selectAll("circle")
 	.data(nodes)
 	.join("circle")
-	.attr("r", 3.5)
+	.attr("r", function(d){
+		if(d.nodetype == 'industry'){
+			return 5
+		}else{
+			return 3.5
+		}
+		
+	})
 	
 simulation.on("tick", () => {
     link
