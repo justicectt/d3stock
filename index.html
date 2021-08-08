@@ -56,13 +56,13 @@ var nodes = [
 ]
 var links = [
 	{'source': '01', 'target': '02'},
-	{'source': '01', 'target': '03'},
-	{'source': '01', 'target': '04'},
-	{'source': '01', 'target': '09'},
-	{'source': '01', 'target': '05'},
-	{'source': '01', 'target': '08'},
-	{'source': '01', 'target': '06'},
-	{'source': '01', 'target': '08'}
+	{'source': '02', 'target': '03'},
+	{'source': '03', 'target': '04'},
+	{'source': '04', 'target': '05'},
+	{'source': '05', 'target': '06'},
+	{'source': '06', 'target': '08'},
+	{'source': '08', 'target': '09'},
+	{'source': '09', 'target': '01'}
 ]
 
 var simulation = d3.forceSimulation(nodes)
